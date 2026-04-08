@@ -115,20 +115,6 @@ Currently implemented:
 
 ---
 
-## 🔹 Testing
-
-Run all tests with:
-
-```bash
-pytest
-```
-
-* `test_metrics/` — tests for evaluation metrics
-* `test_load.py` — tests for data loading
-* `test_models.py` — tests for retrieval models
-
----
-
 ## 📌 Notes
 
 * MEDLINE queries are included in the dataset (`MED.QRY`) and preprocessed before retrieval.
