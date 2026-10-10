@@ -13,6 +13,9 @@ def precision_at_k(ranking, relevant_docs, k: int):
     if not ranking:
         return 0.0
 
+    if k <= 0:
+        return 0.0
+
     # If k is larger than the number of docs
     denom = min(k, len(ranking))
 
