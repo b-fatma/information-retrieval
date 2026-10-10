@@ -1,6 +1,5 @@
 def precision(ranking, relevant_docs):
-    """
-    Compute precision for a single query.
+    """Compute precision for a single query.
 
     Precision (P) is the fraction of retrieved documents that are relevant. Precision = #relevant items retrieved / #retrieved items
 
