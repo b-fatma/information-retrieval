@@ -2,6 +2,8 @@ def recall_at_k(ranking, relevant_docs, k: int):
     """
     Compute recall@k for a single query.
 
+    Rexall@K (R@K) measures the proportion of relevant documents that are among the top-K retrieved results. R@K = # relevant documents in top-K / # relevant documents
+
     Args:
         ranking (list of tuples): [(doc_id, score), ...] in ranked order
         relevant_docs (set or list): Set or list of relevant document IDs

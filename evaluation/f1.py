@@ -1,7 +1,7 @@
 def f1_score(ranking, relevant_docs):
     """Compute f1-score for one query.
 
-    f1-score = (2 * precision * recall) / (precision + recall)
+    F1-score is the weighted harmonic mean of precision (P) and recall (R). F1 = 2PR / (P + R)
 
     Args:
         ranking (list of tuples): [(doc_id, score), ...] in ranked order

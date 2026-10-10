@@ -1,6 +1,7 @@
 def precision_at_k(ranking, relevant_docs, k: int):
-    """
-    Compute precision@k for a single query.
+    """Compute precision@k for a single query.
+
+    Precision@K (P@K) measures the proportion of relevant documents among the top-K retrieved results. P@K = # relevant documents in top-K / K
 
     Args:
         ranking (list of tuples): [(doc_id, score), ...] in ranked order

@@ -1,6 +1,7 @@
 def recall(ranking, relevant_docs):
-    """
-    Compute recall for a single query.
+    """Compute recall for a single query.
+
+    Recall (R) is the fraction of relevant documents that are retrieved. Recall = #relevant items retrieved / #relevant items
 
     Args:
         ranking (list of tuples): [(doc_id, score), ...] in ranked order

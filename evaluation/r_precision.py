@@ -1,7 +1,7 @@
 def r_precision(ranking, relevant_docs):
     """R-Precision for a single query.
 
-    R-Precision is equivalent to Precision@R
+    R-Precision computes precision at rank R, where R is the number of relevant documents for a given query. R-Precision = Precision@R
 
     Args:
         ranking (list of tuples): [(doc_id, score), ...] in ranked order
