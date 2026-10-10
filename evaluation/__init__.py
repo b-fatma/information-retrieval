@@ -1,5 +1,5 @@
 from .precision import precision
-# from .recall import recall
+from .recall import recall
 # from .f1 import f1_score
 # from .precision_recall_curve import precision_recall_curve
 # from .interpolated_precision_recall_curve import interpolated_precision_recall_curve
