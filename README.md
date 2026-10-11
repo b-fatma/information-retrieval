@@ -119,13 +119,13 @@ Evaluation metrics are not always suitable for both types of systems. Some metri
 **Precision (P)** is the fraction of retrieved documents that are relevant.
 
 $$
-\text{Precision} = \frac{\#(\text{relevant items retrieved})}{\#(\text{retrieved items})}
+\text{Precision} = \frac{|\text{relevant items retrieved}|}{|\text{retrieved items}|}
 $$
 
 **Recall (R)** is the fraction of relevant documents that are retrieved.
 
 $$
-\text{Recall} = \frac{\#(\text{relevant items retrieved})}{\#(\text{relevant items})}
+\text{Recall} = \frac{|\text{relevant items retrieved}|}{|\text{relevant items}|}
 $$
 
 **F1-score** is the weighted harmonic mean of precision and recall.
@@ -189,7 +189,7 @@ Interpolated MAP is computed using interpolated precision values instead of raw 
 Precision@K measures the proportion of relevant documents among the top-$K$ retrieved results:
 
 $$
-P@K = \frac{\#\text{ relevant documents in top-}K}{K}
+P@K = \frac{|\text{ relevant documents in top-}K|}{K}
 $$
 
 This metric focuses on early precision and reflects user satisfaction when **only the first few results are examined**. In this work, we report $P@5$ and $P@10$.
