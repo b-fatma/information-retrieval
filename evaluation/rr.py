@@ -1,4 +1,4 @@
-def rr(ranking, relevant_docs):
+def reciprocal_rank(ranking, relevant_docs):
     """Compute reciprocal rank for a single query.
 
     Reciprocal Rank (RR) measures how early the first relevant document is retrieved. RR = 1 / rank of first relevant document
