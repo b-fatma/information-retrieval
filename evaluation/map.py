@@ -25,3 +25,21 @@ def average_precision(ranking, relevant_docs):
             precisions.append(hits / k)
 
     return sum(precisions) / len(precisions)
+
+
+def mean_average_precision(rankings, relevant_docs):
+    """Compute mean average precision.
+
+    Mean Average Precision (MAP) is the mean over queries of the average precision.
+
+    Args:
+        rankings (dictionary of query, list of tuples pairs): {"Q1": [(doc_id, score), ...], ...} in ranked order
+        relevant_docs (set or list): Set or list of relevant document IDs
+    
+    Returns:
+        float: Mean average precision value (between 0 and 1)
+    """
+    avs = []
+    for qid, ranking in rankings:
+        avs.append(average_precision(ranking, relevant_docs))
+    return sum(avs) / len(avs)
