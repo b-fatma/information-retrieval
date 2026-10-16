@@ -1,22 +1,26 @@
-def recall_at_k(ranking, relevant_docs, k: int):
-    """
-    Compute recall@k for a single query.
+from collections.abc import Collection, Sequence
 
-    Rexall@K (R@K) measures the proportion of relevant documents that are among the top-K retrieved results. R@K = # relevant documents in top-K / # relevant documents
+
+def recall_at_k(
+    ranking: Sequence[tuple[int, float]],
+    relevant_docs: Collection[int],
+    k: int,
+) -> float:
+    """Compute recall@k for a single query.
+
+    Recall@K (R@K) measures the proportion of relevant documents that are
+    among the top-K retrieved results.
+    R@K = # relevant documents in top-K / # relevant documents.
 
     Args:
-        ranking (list of tuples): [(doc_id, score), ...] in ranked order
-        relevant_docs (set or list): Set or list of relevant document IDs
-        k (int): position
+        ranking: [(doc_id, score), ...] in ranked order.
+        relevant_docs: Collection of relevant document IDs.
+        k: Cutoff position.
 
     Returns:
-        float: Recall@k value (between 0 and 1)
+        Recall@k value (between 0 and 1).
     """
-    
-    if not relevant_docs:
-        return 0.0
-
-    if not ranking or k <= 0:
+    if not relevant_docs or not ranking or k <= 0:
         return 0.0
 
     # If k is larger than the number of docs
@@ -28,5 +32,4 @@ def recall_at_k(ranking, relevant_docs, k: int):
     # Count relevant retrieved
     rel_ret = sum(1 for doc_id in ranked_doc_ids if doc_id in relevant_docs)
 
-    
     return rel_ret / len(relevant_docs)
