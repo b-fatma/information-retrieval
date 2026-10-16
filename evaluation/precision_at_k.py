@@ -1,20 +1,28 @@
-def precision_at_k(ranking, relevant_docs, k: int):
+from collections.abc import Collection, Sequence
+
+
+def precision_at_k(
+    ranking: Sequence[tuple[int, float]],
+    relevant_docs: Collection[int],
+    k: int,
+) -> float:
     """Compute precision@k for a single query.
 
-    Precision@K (P@K) measures the proportion of relevant documents among the top-K retrieved results. P@K = # relevant documents in top-K / K
+    Precision@K (P@K) measures the proportion of relevant documents among the
+    top-K retrieved results. P@K = # relevant documents in top-K / K.
+
+    If the ranking contains fewer than K documents, the denominator is the
+    number of documents actually retrieved.
 
     Args:
-        ranking (list of tuples): [(doc_id, score), ...] in ranked order
-        relevant_docs (set or list): Set or list of relevant document IDs
-        k (int): position
+        ranking: [(doc_id, score), ...] in ranked order.
+        relevant_docs: Collection of relevant document IDs.
+        k: Cutoff position.
 
     Returns:
-        float: Precision@k value (between 0 and 1)
+        Precision@k value (between 0 and 1).
     """
-    if not ranking:
-        return 0.0
-
-    if k <= 0:
+    if not ranking or k <= 0:
         return 0.0
 
     # If k is larger than the number of docs
