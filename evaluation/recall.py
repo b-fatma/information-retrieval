@@ -1,16 +1,23 @@
-def recall(ranking, relevant_docs):
+from collections.abc import Collection, Sequence
+
+
+def recall(
+    ranking: Sequence[tuple[int, float]],
+    relevant_docs: Collection[int],
+) -> float:
     """Compute recall for a single query.
 
-    Recall (R) is the fraction of relevant documents that are retrieved. Recall = #relevant items retrieved / #relevant items
+    Recall (R) is the fraction of relevant documents that are retrieved.
+    Recall = # relevant items retrieved / # relevant items.
 
     Args:
-        ranking (list of tuples): [(doc_id, score), ...] in ranked order
-        relevant_docs (set or list): Set or list of relevant document IDs
+        ranking: [(doc_id, score), ...] in ranked order.
+        relevant_docs: Collection of relevant document IDs.
 
     Returns:
-        float: Recall value (between 0 and 1)
+        Recall value (between 0 and 1).
     """
-    if not ranking:
+    if not ranking or not relevant_docs:
         return 0.0
 
     # Extract only doc_ids
