@@ -1,4 +1,9 @@
-def precision(ranking, relevant_docs):
+from collections.abc import Collection, Sequence
+
+def precision(
+    ranking: Sequence[tuple[int, float]],
+    relevant_docs: Collection[int],
+) -> float:
     """Compute precision for a single query.
 
     Precision (P) is the fraction of retrieved documents that are relevant. Precision = #relevant items retrieved / #retrieved items

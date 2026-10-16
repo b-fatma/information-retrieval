@@ -22,7 +22,7 @@ def interpolated_average_precision(ranking, relevant_docs):
     return sum(interpolated_precision_values) / len(interpolated_precision_values) 
 
 
-def mean_interpolated_average_precision(rankings, relevant_docs):
+def interpolated_map(rankings, relevant_docs):
     """Compute the Mean Interpolated Average Precision across multiple queries.
 
     This calculates the mean over all system queries of their individual 
