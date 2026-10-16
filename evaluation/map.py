@@ -1,48 +1,61 @@
-def average_precision(ranking, relevant_docs):
+from collections.abc import Collection, Mapping, Sequence
+
+
+def average_precision(
+    ranking: Sequence[tuple[int, float]],
+    relevant_docs: Collection[int],
+) -> float:
     """Compute average precision for a single query.
 
-    Average of the precision obtained at the rank positions where relevant documents are retrieved.
+    Average of the precision obtained at the rank positions where relevant
+    documents are retrieved.
 
     Args:
-        ranking (list of tuples): [(doc_id, score), ...] in ranked order
-        relevant_docs (set or list): Set or list of relevant document IDs
-    
-    Returns:
-        float: Average precision value (between 0 and 1)
-    """
+        ranking: [(doc_id, score), ...] in ranked order.
+        relevant_docs: Collection of relevant document IDs.
 
+    Returns:
+        Average precision value (between 0 and 1).
+    """
     relevant = set(relevant_docs)
 
     if not ranking or not relevant:
         return 0.0
 
     hits = 0
-    precisions = list()
+    precisions: list[float] = []
 
     for k, (doc_id, _) in enumerate(ranking, start=1):
         if doc_id in relevant:
             hits += 1
             precisions.append(hits / k)
 
-    return sum(precisions) / len(precisions)
+    return sum(precisions) / len(precisions) if precisions else 0.0
 
 
-def mean_average_precision(rankings, relevant_docs):
-    """Compute mean average precision.
+def mean_average_precision(
+    rankings: Mapping[int, Sequence[tuple[int, float]]],
+    relevant_docs: Mapping[int, Collection[int]],
+) -> float:
+    """Compute mean average precision across multiple queries.
+
+    Queries with no entry in `relevant_docs` are treated as having no
+    relevant documents (AP = 0.0) and still count toward the mean.
 
     Args:
-        rankings (dict): {"Q1": [(doc_id, score), ...], "Q2": ...}
-        relevant_docs (dict): {"Q1": {doc_id, ...}, "Q2": {doc_id, ...}}
-    
+        rankings: Mapping of query IDs to ranked (doc_id, score) tuples,
+            e.g., {1: [(doc_id, score), ...], 2: ...}.
+        relevant_docs: Mapping of query IDs to relevant doc IDs,
+            e.g., {1: {doc_id, ...}, 2: {doc_id, ...}}.
+
     Returns:
-        float: Mean average precision value (between 0 and 1)
+        Mean average precision value (between 0 and 1).
     """
     if not rankings:
         return 0.0
 
-    avs = []
-    for qid, ranking in rankings.items():
-        q_relevant = relevant_docs.get(qid, set())
-        avs.append(average_precision(ranking, q_relevant))
-        
+    avs = [
+        average_precision(ranking, relevant_docs.get(qid, set()))
+        for qid, ranking in rankings.items()
+    ]
     return sum(avs) / len(avs)
