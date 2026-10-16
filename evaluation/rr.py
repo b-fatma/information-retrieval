@@ -1,22 +1,29 @@
-def reciprocal_rank(ranking, relevant_docs):
+from collections.abc import Collection, Sequence
+
+
+def reciprocal_rank(
+    ranking: Sequence[tuple[int, float]],
+    relevant_docs: Collection[int],
+) -> float:
     """Compute reciprocal rank for a single query.
 
-    Reciprocal Rank (RR) measures how early the first relevant document is retrieved. RR = 1 / rank of first relevant document
+    Reciprocal Rank (RR) measures how early the first relevant document is
+    retrieved. RR = 1 / rank of first relevant document. Returns 0.0 if no
+    relevant document is retrieved.
 
     Args:
-        ranking (list of tuples): [(doc_id, score), ...] in ranked order
-        relevant_docs (set or list): Set or list of relevant document IDs
+        ranking: [(doc_id, score), ...] in ranked order.
+        relevant_docs: Collection of relevant document IDs.
 
     Returns:
-        float: Reciprocal rank value (between 0 and 1)
+        Reciprocal rank value (between 0 and 1).
     """
     if not ranking:
         return 0.0
 
     # Get rank of first relevant doc
-    for idx, (doc_id, _) in enumerate(ranking):
+    for rank, (doc_id, _) in enumerate(ranking, start=1):
         if doc_id in relevant_docs:
-            r = idx + 1
-            return 1 / r
+            return 1 / rank
 
     return 0.0
