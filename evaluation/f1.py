@@ -1,4 +1,9 @@
-def f1_score(ranking, relevant_docs):
+from collections.abc import Collection, Sequence 
+
+def f1_score(
+    ranking: Sequence[tuple[int, float]], 
+    relevant_docs: Collection[int]
+    ) -> float:
     """Compute f1-score for one query.
 
     F1-score is the weighted harmonic mean of precision (P) and recall (R). F1 = 2PR / (P + R)
