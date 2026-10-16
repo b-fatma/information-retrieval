@@ -1,6 +1,11 @@
 import math
+from collections.abc import Collection, Sequence
 
-def dcg_at_k(ranking, relevant_docs, k=20):
+def dcg_at_k(
+    ranking: Sequence[tuple[int, float]],
+    relevant_docs: Collection[int],
+    k: int =20
+) -> float:
     """Compute Discounted Cumulative Gain at k for a single query.
     
     Args:
